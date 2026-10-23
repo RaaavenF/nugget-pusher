@@ -1,0 +1,25 @@
+{
+  "name": "nugget-pusher",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "sim": "node scripts/simulate.mjs",
+    "check:sku": "node scripts/check-sku.mjs",
+    "test:e2e": "node tests/e2e.mjs",
+    "dev:mock": "node scripts/dev-mock.mjs"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.6.1",
+    "playwright-core": "^1.56.0",
+    "postcss": "^8.5.31",
+    "tailwindcss": "^3.4.17",
+    "vite": "^8.3.5"
+  }
+}

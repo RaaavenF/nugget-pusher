@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.artifacts/
+*.log
+.DS_Store
+
+# 本地密钥，绝不提交
+.env
+.env.*
+!.env.example

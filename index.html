@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#fff2d5" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M8 35 6 24 13 13 24 8 38 8 51 14 57 24 56 36 48 47 36 52 23 50 12 43Z' fill='%23ffc533' stroke='%23a65a12' stroke-width='3'/%3E%3Ccircle cx='24' cy='29' r='3' fill='%235b3317'/%3E%3Ccircle cx='40' cy='29' r='3' fill='%235b3317'/%3E%3Cpath d='M27 38c3 4 8 4 11 0' fill='none' stroke='%235b3317' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <meta name="description" content="麦乐鸡块推币机 × 麦当劳中国 MCP：100 会员积分兑换 5 枚游戏代币，投币推落鸡块，3 个掉落可兑换 1 张真实麦乐鸡券。" />
+    <title>麦乐鸡块推币机 × 麦当劳 MCP</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/tailwind.css" />
+  </head>
+  <body>
+    <svg class="svg-defs" aria-hidden="true">
+      <defs>
+        <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffd86c" />
+          <stop offset="1" stop-color="#eda01f" />
+        </linearGradient>
+        <linearGradient id="redFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ef4a38" />
+          <stop offset="1" stop-color="#b9251d" />
+        </linearGradient>
+        <linearGradient id="boxTop" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffe68f" />
+          <stop offset="1" stop-color="#ffc02e" />
+        </linearGradient>
+        <linearGradient id="boxLeft" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e64431" />
+          <stop offset="1" stop-color="#a9201a" />
+        </linearGradient>
+        <linearGradient id="boxRight" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c62d22" />
+          <stop offset="1" stop-color="#8d1712" />
+        </linearGradient>
+        <linearGradient id="boxNugget" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffd36a" />
+          <stop offset="1" stop-color="#e99a20" />
+        </linearGradient>
+
+        <symbol id="i-logo" viewBox="0 0 64 64">
+          <polygon points="8,35 6,24 13,13 24,8 38,8 51,14 57,24 56,36 48,47 36,52 23,50 12,43" fill="url(#goldFill)" stroke="#a65a12" stroke-width="2.6" stroke-linejoin="round" />
+          <polygon points="13,22 25,12 38,11 49,17 41,24 28,27 18,28" fill="#ffdf86" opacity=".85" />
+          <polygon points="12,43 23,50 36,52 48,47 44,40 32,44 19,39" fill="#d98a1b" opacity=".6" />
+          <ellipse cx="24" cy="29" rx="3.2" ry="4" fill="#5b3317" />
+          <ellipse cx="40" cy="29" rx="3.2" ry="4" fill="#5b3317" />
+          <circle cx="25" cy="27.5" r="1.1" fill="#fff8e2" />
+          <circle cx="41" cy="27.5" r="1.1" fill="#fff8e2" />
+          <path d="M27 38c3 4 8 4 11 0" fill="none" stroke="#5b3317" stroke-width="2.6" stroke-linecap="round" />
+          <ellipse cx="17" cy="36" rx="3.6" ry="2.2" fill="#f47e6a" opacity=".55" />
+          <ellipse cx="47" cy="36" rx="3.6" ry="2.2" fill="#f47e6a" opacity=".55" />
+        </symbol>
+
+        <symbol id="i-token" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="17" fill="#ffcf45" stroke="#b57113" stroke-width="2.5" />
+          <circle cx="20" cy="20" r="12.5" fill="#ffe38a" opacity=".75" />
+          <path d="M11 21c1-6 6-9 11-8 4 .7 7 3.7 7 8 0 5-4.7 8-9.5 7.5C14 28 11 25.3 11 21Z" fill="#e9a024" stroke="#a65a12" stroke-width="1.4" />
+          <path d="M15 18c2-2 5-2.5 8-1.5" fill="none" stroke="#ffdf86" stroke-width="2" stroke-linecap="round" />
+          <path d="M40 20a20 20 0 0 0-8-16" fill="none" stroke="#fff6d6" stroke-width="2" opacity=".8" />
+        </symbol>
+
+        <symbol id="i-tray" viewBox="0 0 40 40">
+          <path d="M7 13h26l-3 15H10L7 13Z" fill="#ffce53" stroke="#a65a12" stroke-width="2.4" stroke-linejoin="round" />
+          <path d="M10 17h20" stroke="#fff1c1" stroke-width="2.5" stroke-linecap="round" opacity=".8" />
+          <path d="M20 3v7m0 0-3.5-3.5M20 10l3.5-3.5" fill="none" stroke="#b82820" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+
+        <symbol id="i-box" viewBox="0 0 40 40">
+          <path d="M6 14 20 7l14 7-14 7-14-7Z" fill="#ffc933" stroke="#96301f" stroke-width="2" stroke-linejoin="round" />
+          <path d="M6 14v13l14 7V21L6 14Z" fill="#da3829" stroke="#96301f" stroke-width="2" stroke-linejoin="round" />
+          <path d="M34 14v13l-14 7V21l14-7Z" fill="#b4231b" stroke="#96301f" stroke-width="2" stroke-linejoin="round" />
+          <path d="m13 21 5 2.5v8L13 29v-8Zm14 2.5-5 2.5v8l5-2.5v-8Z" fill="#fff0cd" opacity=".9" />
+        </symbol>
+
+        <symbol id="i-gift" viewBox="0 0 40 40">
+          <rect x="6" y="14" width="28" height="21" rx="4" fill="#e33b2e" stroke="#96211a" stroke-width="2.2" />
+          <rect x="4" y="10" width="32" height="8" rx="3" fill="#ffc933" stroke="#96211a" stroke-width="2.2" />
+          <path d="M20 10v25" stroke="#ffc933" stroke-width="3" />
+          <path d="M20 10c-6 0-9-4-6-6 3-2 6 2 6 6Zm0 0c6 0 9-4 6-6-3-2-6 2-6 6Z" fill="#ffc933" stroke="#96211a" stroke-width="1.8" />
+        </symbol>
+
+        <symbol id="i-trophy" viewBox="0 0 40 40">
+          <path d="M12 6h16v8c0 6-3.6 10-8 10s-8-4-8-10V6Z" fill="#ffc933" stroke="#a65a12" stroke-width="2.2" stroke-linejoin="round" />
+          <path d="M12 9H6v3c0 5 3 7 7 7m15-10h6v3c0 5-3 7-7 7" fill="none" stroke="#a65a12" stroke-width="2.2" stroke-linecap="round" />
+          <path d="M20 24v7m-6 3h12" stroke="#a65a12" stroke-width="2.8" stroke-linecap="round" />
+          <path d="m20 10 1.4 2.9 3.1.4-2.3 2.2.6 3.1-2.8-1.5-2.8 1.5.6-3.1-2.3-2.2 3.1-.4L20 10Z" fill="#a65a12" />
+        </symbol>
+
+        <symbol id="i-help" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="currentColor" stroke-width="2.8" />
+          <path d="M15 15c.5-3 2.5-4.5 5.4-4.5 3 0 5.1 1.8 5.1 4.3 0 2.4-1.3 3.4-3.4 4.8-1.4.9-2 1.8-2 3.4" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" />
+          <circle cx="20" cy="29" r="1.8" fill="currentColor" />
+        </symbol>
+
+        <symbol id="i-sound-on" viewBox="0 0 40 40">
+          <path d="M8 16h6l7-5v18l-7-5H8v-8Z" fill="currentColor" />
+          <path d="M26 15c2.6 2.8 2.6 7.2 0 10m4-13c4.6 4.7 4.6 11.3 0 16" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" />
+        </symbol>
+
+        <symbol id="i-sound-off" viewBox="0 0 40 40">
+          <path d="M8 16h6l7-5v18l-7-5H8v-8Z" fill="currentColor" />
+          <path d="m26 15 7 10m0-10-7 10" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" />
+        </symbol>
+
+        <symbol id="i-close" viewBox="0 0 40 40">
+          <path d="m12 12 16 16M28 12 12 28" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+        </symbol>
+
+        <symbol id="i-spark" viewBox="0 0 40 40">
+          <path d="M20 2c1.6 10.4 7.6 16.4 18 18-10.4 1.6-16.4 7.6-18 18-1.6-10.4-7.6-16.4-18-18C12.4 18.4 18.4 12.4 20 2Z" fill="currentColor" />
+        </symbol>
+
+        <symbol id="i-drag" viewBox="0 0 40 40">
+          <path d="M12 18a8 8 0 0 1 15-4.5M28 22a8 8 0 0 1-15 4.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+          <path d="m25 9 3.4 4.8-5.6.8M15 31l-3.4-4.8 5.6-.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </symbol>
+
+        <symbol id="art-box" viewBox="0 0 340 260">
+          <ellipse cx="173" cy="238" rx="118" ry="18" fill="#7a2c16" opacity=".18" />
+          <g class="box-shadow">
+            <polygon points="55,105 172,61 289,105 176,151" fill="#ffd65a" />
+            <polygon points="55,105 176,151 176,232 55,185" fill="url(#boxLeft)" />
+            <polygon points="176,151 289,105 289,189 176,232" fill="url(#boxRight)" />
+            <polygon points="49,102 172,55 296,102 176,151" fill="url(#boxTop)" />
+            <polygon points="49,102 176,151 176,170 49,121" fill="#e6402f" />
+            <polygon points="176,151 296,102 296,121 176,170" fill="#b9251d" />
+            <polygon points="69,111 176,69 270,108 172,146" fill="#ffe899" opacity=".55" />
+            <path d="M81 133l70 28v51l-70-28v-51Z" fill="#fff1cd" opacity=".96" />
+            <path d="M116 164l4 10 10 1-8 7 2 10-9-5-9 5 2-10-8-7 10-1z" fill="#ffc533" stroke="#a65a12" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M96 173l31 12" stroke="#e0aa3e" stroke-width="2.4" stroke-linecap="round" opacity=".5" />
+            <path d="M97 195l20 8" stroke="#e0aa3e" stroke-width="2.4" stroke-linecap="round" opacity=".5" />
+            <path d="M226 146l38-14 9 21-38 15-9-22Z" fill="#ffecc0" opacity=".9" />
+            <path d="M246 142l6 2-2 6-6-2 2-6Z" fill="#d83427" />
+            <path d="M252 153l8 3-2 7-8-3 2-7Z" fill="#f0b328" />
+            <ellipse cx="176" cy="84" rx="65" ry="16" fill="#8f1d18" opacity=".18" />
+          </g>
+          <g class="box-nuggets">
+            <path d="M121 78c-2-9 6-15 14-13 4-6 15-5 17 2 9-1 14 7 10 13-3 6-12 7-19 6-9 1-19 0-22-8Z" fill="url(#boxNugget)" stroke="#a65a12" stroke-width="2" />
+            <path d="M157 67c-2-8 5-14 13-12 4-5 13-4 15 2 8-1 13 6 9 12-3 5-11 6-17 5-8 1-17 0-20-7Z" fill="#ffd267" stroke="#a65a12" stroke-width="2" />
+            <path d="M196 79c-2-8 6-14 13-12 5-6 15-4 16 3 9 0 13 7 9 13-4 5-13 6-20 5-8 1-15-1-18-9Z" fill="url(#boxNugget)" stroke="#a65a12" stroke-width="2" />
+          </g>
+          <g class="art-sparkles" fill="#fff3bd">
+            <path d="M58 63c2 8 6 12 14 14-8 2-12 6-14 14-2-8-6-12-14-14 8-2 12-6 14-14Z" />
+            <path d="M285 40c1.4 5.6 4.4 8.6 10 10-5.6 1.4-8.6 4.4-10 10-1.4-5.6-4.4-8.6-10-10 5.6-1.4 8.6-4.4 10-10Z" />
+            <circle cx="303" cy="146" r="5" />
+            <circle cx="40" cy="151" r="4" />
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="app" id="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark brand-mark--mcd" aria-hidden="true"><span>M</span></div>
+          <div class="brand-text">
+            <h1>麦乐鸡推币机<span>!</span></h1>
+            <p>McDonald's MCP <i></i> 会员积分互动</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <span class="mcp-pill" id="mcpPill" title="麦当劳 MCP 连接状态"><i></i><span id="mcpPillText">MCP 连接中</span></span>
+          <button class="icon-btn" id="helpBtn" type="button" aria-label="查看玩法说明">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-help"></use></svg>
+          </button>
+          <button class="icon-btn sound-btn" id="soundBtn" type="button" aria-pressed="false" aria-label="关闭音效">
+            <svg class="sound-on" viewBox="0 0 40 40" aria-hidden="true"><use href="#i-sound-on"></use></svg>
+            <svg class="sound-off" viewBox="0 0 40 40" aria-hidden="true"><use href="#i-sound-off"></use></svg>
+          </button>
+        </div>
+      </header>
+
+      <section id="memberPanel" class="member-panel relative z-[9] mx-auto flex w-full max-w-[920px] items-center gap-2 rounded-[20px] border border-white/90 bg-white/85 px-2.5 py-2 shadow-panel backdrop-blur-md transition-opacity sm:gap-4 sm:px-4 sm:py-2.5" aria-label="麦当劳会员信息">
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-300 to-red-500 text-white shadow-sm sm:h-11 sm:w-11">
+          <svg viewBox="0 0 40 40" aria-hidden="true" class="h-6 w-6 sm:h-7 sm:w-7"><use href="#i-spark"></use></svg>
+        </div>
+        <div class="min-w-0">
+          <p class="hidden text-[9px] font-black uppercase tracking-[0.14em] text-amber-700/70 sm:block">McDonald's MCP · MEMBER</p>
+          <div class="flex items-baseline gap-1.5">
+            <span class="text-[10px] font-bold text-stone-500 sm:text-xs">会员积分</span>
+            <strong id="statPoints" class="text-xl font-black leading-none tabular-nums text-stone-900 sm:text-2xl">—</strong>
+            <span class="text-[9px] font-semibold text-stone-400">分</span>
+          </div>
+          <p id="mcpStatus" class="mt-0.5 hidden max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-semibold text-stone-400 sm:block">正在连接麦当劳 MCP…</p>
+        </div>
+        <div class="ml-auto flex items-center gap-1.5">
+          <button id="buyBtn" type="button" style="background:linear-gradient(180deg,#e94032,#a81e14);box-shadow:0 8px 18px rgba(168,30,20,.25)" class="group flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#e94032] to-[#b8241b] px-2.5 py-1.5 text-left text-white shadow-red-glow transition active:translate-y-0.5 disabled:cursor-wait disabled:opacity-60 sm:rounded-2xl sm:px-3.5 sm:py-2" aria-label="用100积分兑换5枚游戏代币">
+            <span id="buyBadge" class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#ffd34f] text-xs font-black text-[#942018] sm:h-8 sm:w-8 sm:text-sm">+5</span>
+            <span class="flex flex-col">
+              <b id="memberBuyTitle" class="text-[11px] font-black leading-tight sm:text-sm">100积分兑5代币</b>
+              <small id="buyBtnSub" class="mt-0.5 text-[9px] font-semibold leading-tight text-white/80 sm:text-[10px]">立即兑换</small>
+            </span>
+            <svg id="buySpinner" class="hidden h-4 w-4 shrink-0 animate-spin text-white/90" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="3" opacity=".25"/><path d="M21 12a9 9 0 0 0-9-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <main class="stage" id="stage">
+        <div class="stage-bg" aria-hidden="true">
+          <span class="bg-star s1"></span>
+          <span class="bg-star s2"></span>
+          <span class="bg-star s3"></span>
+          <span class="bg-dot d1"></span>
+          <span class="bg-dot d2"></span>
+          <span class="bg-dot d3"></span>
+        </div>
+        <div class="canvas-wrap" id="canvasWrap"></div>
+
+        <div class="stage-top">
+          <div class="jackpot-chip" id="jackpotChip">
+            <span class="jackpot-star"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-spark"></use></svg></span>
+            <span><small>JACKPOT</small><strong>大奖待命</strong></span>
+          </div>
+        </div>
+
+        <div class="world-label label-slot" id="labelSlot" aria-hidden="true"><span>投币口</span><i></i></div>
+        <div class="world-label label-exit" id="labelExit" aria-hidden="true"><span>奖品出口</span><i></i></div>
+
+        <div class="drag-tip" id="dragTip">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-drag"></use></svg>
+          <span>拖动旋转视角</span>
+        </div>
+
+        <div class="hint-bubble" id="hintBubble">
+          <div class="hint-face"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-logo"></use></svg></div>
+          <p id="hintText">用积分兑代币，开始推鸡块！</p>
+          <button type="button" id="hintClose" aria-label="关闭提示"><svg viewBox="0 0 40 40"><use href="#i-close"></use></svg></button>
+          <span class="hint-tail" aria-hidden="true"></span>
+        </div>
+
+        <div class="stage-loader" id="stageLoader">
+          <div class="loader-nugget"><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></div>
+          <p>正在加热油锅…</p>
+        </div>
+      </main>
+
+      <footer class="dock">
+        <div class="dock-handle" aria-hidden="true"></div>
+        <div class="wallet-row">
+          <div class="wallet-chip" id="walletTokens">
+            <span class="wallet-icon icon-token"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-token"></use></svg></span>
+            <div><small>游戏代币</small><strong id="statTokens">0</strong></div>
+          </div>
+          <div class="wallet-chip" id="walletDropped">
+            <span class="wallet-icon icon-tray"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-tray"></use></svg></span>
+            <div><small>已掉落</small><strong id="statDropped">0</strong></div>
+          </div>
+          <div class="wallet-chip" id="walletCoupons">
+            <span class="wallet-icon icon-box"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-box"></use></svg></span>
+            <div><small>麦乐鸡券</small><strong id="statCoupons">0</strong></div>
+          </div>
+          <button class="rewards-btn" id="rewardsBtn" type="button" aria-label="我的奖励">
+            <svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-gift"></use></svg>
+            <span>奖励</span>
+            <i class="reward-dot" id="rewardDot" hidden></i>
+          </button>
+        </div>
+
+        <div class="exchange-row">
+          <div class="exchange-info">
+            <div class="exchange-line">
+              <span class="exchange-label">兑换进度</span>
+              <strong id="exchangeProgressText">还差 3 个虚拟鸡块即可兑换实体券</strong>
+              <em id="exchangeReadyBadge" hidden>可兑 0 张</em>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-fill" id="exchangeBar"></div>
+              <span class="progress-glow"></span>
+            </div>
+          </div>
+          <button class="btn-exchange" id="exchangeBtn" type="button">
+            <b><span id="exchangeFrom">3</span><i>→</i><span id="exchangeTo">1</span></b>
+            <span>兑换</span>
+          </button>
+        </div>
+
+        <div class="action-row is-single">
+          <button class="btn btn-insert" id="insertBtn" type="button">
+            <span class="insert-token"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-token"></use></svg><b id="insertTokenCount">0</b></span>
+            <span class="btn-copy"><b>投 币</b><small id="insertBtnSub">消耗 1 块 · 推下大奖</small></span>
+          </button>
+        </div>
+
+        <div class="dock-foot">
+          <span class="foot-jackpot"><svg viewBox="0 0 40 40" aria-hidden="true"><use href="#i-trophy"></use></svg>大奖 <b id="jackpotFoot">待命中</b></span>
+          <i class="foot-sep"></i>
+          <span id="dockRatio">3 块已掉落 = 1 张麦乐鸡券</span>
+          <button type="button" id="rewardsLink" class="foot-link">我的奖励</button>
+        </div>
+      </footer>
+    </div>
+
+    <div class="modal-layer" id="modalLayer" aria-hidden="true">
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-viewport">
+        <section class="modal-card purchase-modal" id="purchaseModal" role="dialog" aria-modal="true" aria-labelledby="purchaseTitle" hidden>
+          <button class="modal-close" type="button" data-close aria-label="关闭">
+            <svg viewBox="0 0 40 40"><use href="#i-close"></use></svg>
+          </button>
+          <div class="purchase-hero">
+            <div class="hero-sunburst" aria-hidden="true"></div>
+            <svg class="box-art purchase-art" viewBox="0 0 340 260" aria-hidden="true"><use href="#art-box"></use></svg>
+            <div class="nugget-rain" aria-hidden="true">
+              <i><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></i>
+              <i><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></i>
+              <i><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></i>
+              <i><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></i>
+              <i><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></i>
+            </div>
+          </div>
+          <p class="eyebrow">积分兑换成功</p>
+          <h2 id="purchaseTitle">获得 5 枚<br />游戏代币！</h2>
+          <p class="modal-sub" id="purchaseSub">100 积分已通过麦当劳 MCP 扣除，代币已放入投币余额。</p>
+          <div class="receipt-line"><span id="purchaseReceipt">100 积分 · 5 枚游戏代币</span><b id="purchaseAmount">+5 <svg viewBox="0 0 40 40"><use href="#i-token"></use></svg></b></div>
+          <button class="cta cta-primary" type="button" data-close>去投币，开推！</button>
+          <p class="fineprint" id="purchaseFineprint">积分由麦当劳账户实时扣除 · 代币仅用于本游戏</p>
+        </section>
+
+        <section class="modal-card exchange-modal" id="exchangeModal" role="dialog" aria-modal="true" aria-labelledby="exchangeTitle" hidden>
+          <button class="modal-close" type="button" data-close aria-label="关闭">
+            <svg viewBox="0 0 40 40"><use href="#i-close"></use></svg>
+          </button>
+          <p class="eyebrow">奖励兑换</p>
+          <h2 id="exchangeTitle">兑换 <span id="exchangeCouponTitle">1</span> 张麦乐鸡券</h2>
+          <p class="modal-sub" id="exchangeModalSub">用 3 块已掉落的虚拟鸡块，换 1 张真实麦乐鸡券。</p>
+          <div class="exchange-visual" aria-hidden="true">
+            <div class="exchange-side virtual-side">
+              <div class="visual-stack">
+                <svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg>
+                <svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg>
+                <svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg>
+              </div>
+              <b>×3 虚拟</b>
+            </div>
+            <span class="exchange-arrow">→</span>
+            <div class="exchange-side physical-side">
+              <div class="physical-ticket"><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></div>
+              <b>1 张券</b>
+            </div>
+          </div>
+          <div class="receipt-line"><span>从「已掉落」扣除</span><b id="exchangeCost">3 块</b></div>
+          <p class="fineprint fineprint-left">兑换成功后，券将发放至你的麦当劳账户；可在「我的奖励」查看券码。</p>
+          <button class="cta cta-primary" type="button" id="confirmExchangeBtn">确认兑换</button>
+          <button class="cta cta-quiet" type="button" data-close>再攒攒</button>
+        </section>
+
+
+        <section class="modal-card insufficient-modal" id="noCoinModal" role="dialog" aria-modal="true" aria-labelledby="noCoinTitle" hidden>
+          <button class="modal-close" type="button" data-close aria-label="关闭">
+            <svg viewBox="0 0 40 40"><use href="#i-close"></use></svg>
+          </button>
+          <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] bg-gradient-to-br from-amber-200 to-orange-300 shadow-inner">
+            <svg viewBox="0 0 40 40" class="h-12 w-12" aria-hidden="true"><use href="#i-token"></use></svg>
+          </div>
+          <p class="eyebrow mt-4">NEED MORE COINS</p>
+          <h2 id="noCoinTitle" class="text-3xl font-black text-stone-900">代币用完了</h2>
+          <p class="modal-sub">积分不足，请先去兑换代币。</p>
+          <div class="mx-auto my-4 flex w-full max-w-[360px] items-center justify-between rounded-2xl border border-dashed border-amber-300 bg-amber-50/80 px-4 py-3 text-left">
+            <span class="text-xs font-bold text-stone-500">会员积分兑币</span>
+            <b id="noCoinCost" class="text-sm font-black text-mcd-red">100 积分 = 5 代币</b>
+          </div>
+          <button class="cta cta-primary" type="button" id="noCoinBuyBtn">去积分兑币</button>
+          <button class="cta cta-quiet" type="button" data-close>先逛逛</button>
+        </section>
+
+        <section class="modal-card coupon-success-modal" id="couponModal" role="dialog" aria-modal="true" aria-labelledby="couponTitle" hidden>
+          <div class="coupon-burst" aria-hidden="true"></div>
+          <p class="eyebrow">REWARD UNLOCKED</p>
+          <h2 id="couponTitle" class="text-center text-4xl font-black leading-tight text-stone-900">麦乐鸡券<br /><em class="text-mcd-red">已到账！</em></h2>
+          <p class="modal-sub">券已发至麦当劳账户，请打开麦当劳 App / 小程序查看。</p>
+          <div class="coupon-ticket mx-auto my-5 w-full max-w-[370px] rounded-[24px] border-2 border-dashed border-red-300 bg-gradient-to-br from-[#fff8e5] to-[#ffe7a7] px-5 py-5 text-left shadow-panel">
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-red-700/60">McDonald's Coupon</span>
+              <span class="rounded-full bg-red-600 px-2.5 py-1 text-[10px] font-black text-white">已发放</span>
+            </div>
+            <div class="mt-3 text-[11px] font-bold text-stone-500">麦乐鸡券 · 1 张</div>
+            <strong id="couponCode" class="mt-1 block break-all text-xl font-black tracking-wider text-stone-900">MCD-...</strong>
+            <small id="couponOrder" class="mt-2 block text-[10px] font-semibold text-stone-400">订单号 --</small>
+          </div>
+          <button class="cta cta-primary" type="button" data-close>太棒了，继续玩</button>
+          <p class="fineprint">可在「我的奖励」随时查看券码和订单记录</p>
+        </section>
+
+        <section class="modal-card rewards-modal" id="rewardsModal" role="dialog" aria-modal="true" aria-labelledby="rewardsTitle" hidden>
+          <button class="modal-close" type="button" data-close aria-label="关闭">
+            <svg viewBox="0 0 40 40"><use href="#i-close"></use></svg>
+          </button>
+          <div class="modal-heading-row">
+            <div>
+              <p class="eyebrow">MY REWARDS</p>
+              <h2 id="rewardsTitle">我的奖励</h2>
+            </div>
+            <div class="rewards-mascot"><svg viewBox="0 0 64 64"><use href="#i-logo"></use></svg></div>
+          </div>
+          <div class="rewards-summary">
+            <div><small>已掉落</small><strong id="rewardDropped">0</strong><span>虚拟鸡块</span></div>
+            <div><small>可兑换</small><strong id="rewardExchangeable">0</strong><span>张麦乐鸡券</span></div>
+            <div><small>已兑换</small><strong id="rewardCoupons">0</strong><span>张麦乐鸡券</span></div>
+          </div>
+          <div class="rewards-jackpot" id="rewardsJackpot">
+            <span class="jackpot-mini"><svg viewBox="0 0 40 40"><use href="#i-trophy"></use></svg></span>
+            <div><b>整盒大奖</b><small id="rewardsJackpotText">还在推币机里，等你推落</small></div>
+            <span class="jackpot-state" id="rewardsJackpotState">待命中</span>
+            <button type="button" class="jackpot-refresh" id="refreshJackpotBtn" hidden>刷新大奖</button>
+          </div>
+          <div class="rewards-section-head"><h3>兑换记录</h3><span id="recordsCount">0 条</span></div>
+          <div class="record-list" id="recordsList"></div>
+          <div class="claim-note">
+            <b>领取方式</b>
+            <p id="claimNote"></p>
+          </div>
+          <div class="caps-note" id="capsNote"></div>
+          <div class="rewards-footer">
+            <button type="button" class="text-danger" id="resetDemoBtn">重置游戏进度</button>
+            <span>游戏进度存本机；积分/券以麦当劳账户为准</span>
+          </div>
+        </section>
+
+        <section class="modal-card win-modal" id="winModal" role="dialog" aria-modal="true" aria-labelledby="winTitle" hidden>
+          <div class="win-ray" aria-hidden="true"></div>
+          <p class="win-kicker">JACKPOT!</p>
+          <div class="win-art-wrap">
+            <div class="win-glow" aria-hidden="true"></div>
+            <svg class="box-art win-art" viewBox="0 0 340 260" aria-hidden="true"><use href="#art-box"></use></svg>
+            <div class="win-stars" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span><span>✧</span></div>
+          </div>
+          <h2 id="winTitle">恭喜获得<br /><em>一整盒麦乐鸡！</em></h2>
+          <p class="modal-sub">整盒大奖已收入「我的奖励」。收下后 5 秒自动补货，也可在奖励页立即刷新。</p>
+          <div class="win-code"><span>领取码</span><b id="winCode">BOX-DEMO</b></div>
+          <button class="cta cta-win" type="button" data-close>收下大奖</button>
+          <button class="win-later" type="button" data-close>稍后查看</button>
+        </section>
+
+        <section class="modal-card help-modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+          <button class="modal-close" type="button" data-close aria-label="关闭">
+            <svg viewBox="0 0 40 40"><use href="#i-close"></use></svg>
+          </button>
+          <p class="eyebrow">HOW TO PLAY</p>
+          <h2 id="helpTitle">三步推走大奖</h2>
+          <ol class="how-list">
+            <li><span class="how-num">1</span><div><b>积分兑币</b><p>用 <span id="helpPoints">100</span> 会员积分兑换 <span id="helpTokens">5</span> 枚游戏代币，积分通过麦当劳 MCP 实时扣除。</p></div></li>
+            <li><span class="how-num">2</span><div><b>投币开推</b><p>每次投币消耗 1 枚代币。推板来回推动，鸡块掉进前方出口就算你的。</p></div></li>
+            <li><span class="how-num">3</span><div><b>兑换麦乐鸡券</b><p>每 <span id="helpRate">3</span> 块已掉落鸡块可换 <span id="helpCoupons">1</span> 张真实麦乐鸡券；推落整盒大奖直接抱走一整盒。</p></div></li>
+          </ol>
+          <div class="how-tip">
+            <svg viewBox="0 0 40 40"><use href="#i-spark"></use></svg>
+            <p>小技巧：鸡块越靠近出口越容易被推落。连续投币，让推板把整排鸡块一起带走。</p>
+          </div>
+          <p class="fineprint">会员积分与麦乐鸡券通过麦当劳中国 MCP 处理；游戏代币和掉落物仅在本游戏内有效。音效由 WebAudio 程序化合成，不使用外部 BGM。</p>
+          <button class="cta cta-primary" type="button" data-close>知道了</button>
+        </section>
+      </div>
+    </div>
+
+    <div class="toast-stack" id="toastStack" aria-live="polite" aria-atomic="false"></div>
+    <div class="fly-layer" id="flyLayer" aria-hidden="true"></div>
+    <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
